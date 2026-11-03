@@ -509,6 +509,22 @@ body.tk-page { background: #F5F8F7; color: var(--tk-green-30, #374B3F); }
 .tk-plain .tk-wordmark { margin-bottom: clamp(32px, 6vw, 80px); }
 .tk-plain .tk-button { justify-self: start; }
 
+/* sites/professor/styles/10-motion.css */
+/* Bewegung wie auf der BAC-Seite (shared/styles/04-motion.css):
+   Das Fadenkreuz im Hero zeichnet sich beim Laden, die Balken füllen sich, sobald sie sichtbar werden.
+   Greift nur mit Skript (Klasse "bac-js") und ohne Wunsch nach reduzierter Bewegung. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .bac-js .tk-hero__line--top,
+  .bac-js .tk-hero__line--bottom { transform-origin: top; animation: bac-draw-y 1.6s cubic-bezier(.2, .7, .2, 1) both; }
+  .bac-js .tk-hero__line--left,
+  .bac-js .tk-hero__line--right { transform-origin: left; animation: bac-draw-x 1.6s cubic-bezier(.2, .7, .2, 1) .2s both; }
+  .bac-js .tk-hero__mark { animation: bac-fade 1.2s ease .6s both; }
+
+  .bac-js .tk-figure__bar span { transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.2, .7, .2, 1) .2s; }
+  .bac-js .is-visible .tk-figure__bar span { transform: scaleX(1); }
+}
+
 /* sites/professor/styles/site.css */
 
     /* Onepage: Site code → Styles
@@ -2322,7 +2338,7 @@ window.addEventListener("DOMContentLoaded",function(){
         Entscheidung.</h2>
 
     
-    <figure class="tk-figure">
+    <figure class="tk-figure" data-reveal>
         <div class="tk-figure__row">
             <p class="tk-display">50&nbsp;%</p>
             <p class="tk-body">unserer Lebensspanne bestimmen wir selbst: mit Ernährung, Bewegung, Schlaf und dem Umgang
