@@ -7,15 +7,19 @@
   <title>Prof. Dr. med. Thomas Kälicke · Longevity-Experte, Chefarzt, Autor</title>
   <meta name="description" content="Prof. Dr. med. Thomas Kälicke verbindet wissenschaftliche Erkenntnisse zu Longevity mit Strategien, die im Alltag funktionieren. Chefarzt, Redner und Autor des Buches LNGVTY.">
   
-  <link rel="canonical" href="https://kaelicke.com/">
+  <link rel="canonical" href="https://jcssharing.github.io/kaelicke-vorschau/">
   <meta name="theme-color" content="#0C1F15">
 
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Prof. Dr. med. Thomas Kälicke">
   <meta property="og:title" content="Prof. Dr. med. Thomas Kälicke · Longevity-Experte, Chefarzt, Autor">
   <meta property="og:description" content="Prof. Dr. med. Thomas Kälicke verbindet wissenschaftliche Erkenntnisse zu Longevity mit Strategien, die im Alltag funktionieren. Chefarzt, Redner und Autor des Buches LNGVTY.">
-  <meta property="og:url" content="https://kaelicke.com/">
-  <meta property="og:image" content="https://kaelicke.com/img/kaelicke-kueche.webp">
+  <meta property="og:url" content="https://jcssharing.github.io/kaelicke-vorschau/">
+  <meta property="og:image" content="https://jcssharing.github.io/kaelicke-vorschau/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta property="og:locale" content="de_DE">
   <style>
 /* shared/styles/01-tokens.css */
@@ -475,15 +479,19 @@ img, svg { display: block; }
   }
   .bac-js [data-reveal].is-visible { opacity: 1; transform: none; }
 
-  /* Kopfbereiche der Fenster tragen den dunklen Verlauf: Der Kopf selbst bleibt immer sichtbar,
-     nur sein Inhalt wird eingeblendet. Sonst wäre der dunkle Teil kurz hell. */
-  .bac-js .bac-window__head[data-reveal] { opacity: 1; transform: none; transition: none; }
-  .bac-js .bac-window__head[data-reveal] > * {
+  /* Kopf- und Inhaltsbereich der Fenster tragen den Verlauf: Sie selbst bleiben immer sichtbar,
+     nur ihr Inhalt wird eingeblendet. Sonst wäre der Verlauf kurz hell und an der Linie
+     zwischen beiden entstünde beim Scrollen ein Versatz. */
+  .bac-js .bac-window__head[data-reveal],
+  .bac-js .bac-window__body[data-reveal] { opacity: 1; transform: none; transition: none; }
+  .bac-js .bac-window__head[data-reveal] > *,
+  .bac-js .bac-window__body[data-reveal] > * {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
   }
-  .bac-js .bac-window__head[data-reveal].is-visible > * { opacity: 1; transform: none; }
+  .bac-js .bac-window__head[data-reveal].is-visible > *,
+  .bac-js .bac-window__body[data-reveal].is-visible > * { opacity: 1; transform: none; }
   .bac-js .bac-window__head[data-reveal] > .bac-cross { transform: none; }
 
   /* Fortschrittsbalken der Grafik füllt sich, sobald er sichtbar wird */
