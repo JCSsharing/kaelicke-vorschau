@@ -489,6 +489,8 @@ img, svg { display: block; }
   /* Fortschrittsbalken der Grafik füllt sich, sobald er sichtbar wird */
   .bac-js .bac-bars__fill { transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.2, .7, .2, 1) .2s; }
   .bac-js .is-visible .bac-bars__fill { transform: scaleX(1); }
+  /* Jede weitere Zeile startet etwas später, im Takt mit ihrer Zahl (shared/scripts/03-count.js) */
+  .bac-js .bac-bars__row ~ .bac-bars__row .bac-bars__fill { transition-delay: .8s; }
 
   /* Die Achsenlinie im Hero zeichnet sich beim Laden */
   .bac-js .bac-hero .bac-cross__t,
@@ -523,6 +525,8 @@ body.tk-page { background: #F5F8F7; color: var(--tk-green-30, #374B3F); }
 
   .bac-js .tk-figure__bar span { transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.2, .7, .2, 1) .2s; }
   .bac-js .is-visible .tk-figure__bar span { transform: scaleX(1); }
+  /* Zweite Zeile startet etwas später, im Takt mit ihrer Zahl (shared/scripts/03-count.js) */
+  .bac-js .tk-figure__row ~ .tk-figure__row .tk-figure__bar span { transition-delay: .8s; }
 }
 
 /* sites/professor/styles/site.css */
@@ -2274,6 +2278,58 @@ window.addEventListener("DOMContentLoaded",function(){
   });
 })();
 
+// shared/scripts/03-count.js
+(function () {
+  "use strict";
+
+  // Zahlen mit data-count zählen von 0 hoch, sobald sie ins Bild kommen,
+  // im selben Takt wie der Balken daneben (siehe 04-motion.css).
+  // Jede weitere Zahl derselben Grafik startet etwas später, wie ihr Balken.
+  // Ohne Skript oder bei reduzierter Bewegung bleibt die Zahl einfach stehen.
+  var START = 200;      // ms, wie die Verzögerung der Balken
+  var STEP = 600;       // ms Versatz zur nächsten Zeile
+  var DURATION = 1400;  // ms, wie die Balken
+
+  if (!("IntersectionObserver" in window)) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var items = [];
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var m = el.textContent.match(/^(\D*)(\d+)([\s\S]*)$/);
+    if (!m) return;
+    var group = el.closest("figure") || el.parentNode;
+    var index = group.querySelectorAll("[data-count]");
+    items.push({ el: el, group: group, before: m[1], target: +m[2], after: m[3], delay: START + STEP * Array.prototype.indexOf.call(index, el) });
+    el.setAttribute("aria-label", el.textContent);
+    el.textContent = m[1] + "0" + m[3];
+  });
+
+  // Gestartet wird mit der ganzen Grafik, damit Zahlen und Balken gleichzeitig loslaufen
+  // (gleiche Einstellungen wie das Einblenden in 01-core.js)
+  // Gleiche Kurve wie die Balken: schnell los, weich auslaufen
+  function ease(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function run(item) {
+    var t0 = null;
+    function frame(now) {
+      if (t0 === null) t0 = now;
+      var t = Math.min((now - t0) / DURATION, 1);
+      item.el.textContent = item.before + Math.round(item.target * ease(t)) + item.after;
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    setTimeout(function () { requestAnimationFrame(frame); }, item.delay);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      items.forEach(function (item) { if (item.group === e.target) run(item); });
+    });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+  items.forEach(function (item) { io.observe(item.group); });
+})();
+
 });
 </script>
 </head>
@@ -2340,13 +2396,13 @@ window.addEventListener("DOMContentLoaded",function(){
     
     <figure class="tk-figure" data-reveal>
         <div class="tk-figure__row">
-            <p class="tk-display">50&nbsp;%</p>
+            <p class="tk-display" data-count>50&nbsp;%</p>
             <p class="tk-body">unserer Lebensspanne bestimmen wir selbst: mit Ernährung, Bewegung, Schlaf und dem Umgang
                 mit Stress.</p>
             <span class="tk-figure__bar tk-figure__bar--yours" aria-hidden="true"><span></span></span>
         </div>
         <div class="tk-figure__row">
-            <p class="tk-h2">50&nbsp;%</p>
+            <p class="tk-h2" data-count>50&nbsp;%</p>
             <p class="tk-body">sind genetisch festgelegt.</p>
             <span class="tk-figure__bar" aria-hidden="true"><span></span></span>
         </div>
