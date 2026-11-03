@@ -1556,7 +1556,7 @@ body.tk-page { background: #F5F8F7; color: var(--tk-green-30, #374B3F); }
     /* Abschnitt 2 "Die Erkenntnis": weißer Abschnitt nach dem Hero */
 
     .tk-insight .tk-insight__title {
-        max-width: 20ch;
+        max-width: 765px;
     }
 
     .tk-figure {
@@ -1883,6 +1883,12 @@ body.tk-page { background: #F5F8F7; color: var(--tk-green-30, #374B3F); }
         margin-top: clamp(64px, 7vw, 104px);
         padding-left: 28px;
         border-left: 2px solid var(--tk-green-30);
+    }
+
+    /* Zitat direkt unter der Überschrift statt am Ende des Abschnitts */
+    .tk-vision__appeal--head {
+        margin-top: 16px;
+        margin-bottom: 36px;
     }
 
     .tk-vision__appeal blockquote {
@@ -2365,7 +2371,7 @@ window.addEventListener("DOMContentLoaded",function(){
         </div>
 
         <header class="tk-hero__header">
-            <a class="tk-wordmark" href="/" aria-label="Thomas Kälicke, zur Startseite">Thomas Kälicke</a>
+            <a class="tk-wordmark" href="#top" aria-label="Thomas Kälicke, zur Startseite">Thomas Kälicke</a>
             <nav class="tk-hero__nav" aria-label="Hauptnavigation">
                 <a href="#buch" class="tk-hero__nav-mid">Buch</a>
                 <a href="#ueber" class="tk-hero__nav-wide">Über</a>
@@ -2398,14 +2404,14 @@ window.addEventListener("DOMContentLoaded",function(){
 <section class="tk tk-bleed tk-section tk-insight" id="erkenntnis" aria-labelledby="tk-insight-title">
     <span class="tk-axis" aria-hidden="true"></span>
 
-    <h2 class="tk-h2 tk-insight__title" id="tk-insight-title">Gesund alt zu werden ist kein Zufall. Es ist eine
-        Entscheidung.</h2>
+    <h2 class="tk-h2 tk-insight__title" id="tk-insight-title">Altern ist ein Prozess den man extrem modulieren kann. Gesundheit im Alter ist kein
+        Zufall. Sie ist eine Entscheidung.</h2>
 
     
     <figure class="tk-figure" data-reveal>
         <div class="tk-figure__row">
             <p class="tk-display" data-count>50&nbsp;%</p>
-            <p class="tk-body">unserer Lebensspanne bestimmen wir selbst: mit Ernährung, Bewegung, Schlaf und dem Umgang
+            <p class="tk-body">unserer Gesundheitsentwicklung bestimmen wir selbst: mit Ernährung, Bewegung, Schlaf und dem Umgang
                 mit Stress.</p>
             <span class="tk-figure__bar tk-figure__bar--yours" aria-hidden="true"><span></span></span>
         </div>
@@ -2415,9 +2421,9 @@ window.addEventListener("DOMContentLoaded",function(){
             <span class="tk-figure__bar" aria-hidden="true"><span></span></span>
         </div>
         <figcaption>
-            <p class="tk-lead">Alt werden, ohne krank zu sein: Das ist möglich. Wer versteht, wie der Körper
-                funktioniert, und ihn mit den richtigen Impulsen unterstützt, lebt nicht nur länger, sondern vor allem
-                gesünder und vitaler.</p>
+            <p class="tk-lead">Wir haben unglaublich viel in der Hand. Wer versteht, wie der Körper funktioniert, wie
+                man Resilienz erhöht und Regeneration optimiert, lebt nicht nur länger, sondern vor allem gesünder und
+                vitaler.</p>
         </figcaption>
     </figure>
 </section>
@@ -2563,8 +2569,8 @@ window.addEventListener("DOMContentLoaded",function(){
 
                 <dl class="tk-about__facts">
                     <div>
-                        <dt class="tk-h2">38</dt>
-                        <dd class="tk-body">Jahre alt, als er 2011 Chefarzt wurde</dd>
+                        <dt class="tk-h2">16</dt>
+                        <dd class="tk-body">Erfahrung als Chefarzt der Chirurgie in Bonn</dd>
                     </div>
                     <div>
                         <dt class="tk-h2">3.000+</dt>
@@ -2594,6 +2600,13 @@ window.addEventListener("DOMContentLoaded",function(){
     <div class="tk-vision__head">
         <p class="tk-caption">Gesellschaftspolitische Vision</p>
         <h2 class="tk-h2" id="tk-vision-title">Prävention als Staatsaufgabe.</h2>
+        <figure class="tk-vision__appeal tk-vision__appeal--head">
+            <blockquote>
+                <p class="tk-h3">„Deutschland muss vom Reparaturbetrieb zur Gesundheitsnation werden. Nicht erst
+                    reagieren, wenn Menschen krank sind, sondern verhindern, dass sie es werden.“</p>
+            </blockquote>
+            <figcaption class="tk-caption">Prof. Dr. med. Thomas Kälicke</figcaption>
+        </figure>
         <p class="tk-lead">Schon heute sind in Deutschland über 5,7 Millionen Menschen pflegebedürftig, Tendenz
             steigend. Pflege dauert im Schnitt sechs bis neun Jahre. Wenn wir Prävention ernst nehmen, können wir diesen
             Trend umkehren.</p>
@@ -2627,13 +2640,6 @@ window.addEventListener("DOMContentLoaded",function(){
         </li>
     </ol>
 
-    <figure class="tk-vision__appeal">
-        <blockquote>
-            <p class="tk-h3">„Deutschland muss vom Reparaturbetrieb zur Gesundheitsnation werden. Nicht erst reagieren,
-                wenn Menschen krank sind, sondern verhindern, dass sie es werden.“</p>
-        </blockquote>
-        <figcaption class="tk-caption">Prof. Dr. med. Thomas Kälicke</figcaption>
-    </figure>
 </section>
 
 <section class="tk tk-bleed tk-windowsec tk-media" id="medien" aria-labelledby="tk-media-title">
@@ -2752,8 +2758,8 @@ window.addEventListener("DOMContentLoaded",function(){
     <div class="tk-footer__row">
         <a class="tk-wordmark" href="#top" aria-label="Thomas Kälicke, nach oben">Thomas Kälicke</a>
         <nav class="tk-footer__nav tk-body" aria-label="Rechtliches">
-            <a href="/impressum/">Impressum</a>
-            <a href="/datenschutz/">Datenschutz</a>
+            <a href="https://kaelicke.com/impressum/" target="_blank" rel="noopener">Impressum</a>
+            <a href="https://kaelicke.com/datenschutz/" target="_blank" rel="noopener">Datenschutz</a>
         </nav>
     </div>
     <p class="tk-caption tk-footer__meta">Die Inhalte dieser Seite dienen der allgemeinen Information und ersetzen keine
